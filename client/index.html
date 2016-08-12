@@ -14,7 +14,8 @@
     <script src="collections/Songs.js"></script> <!-- collection for the song models -->
     <script src="collections/SongQueue.js"></script> <!-- collection for song models (queue) -->
     <script src="models/AppModel.js"></script>  <!-- sets up current song and queue'ed songs -->
-
+    <script src="views/SongQueueView.js"></script>
+    <script src="views/SongQueueEntryView.js"></script>
     <script src="views/PlayerView.js"></script> <!-- the visual music player for currently playing songs -->
     <script src="views/LibraryView.js"></script> <!-- the library of songs in a table format -->
     <script src="views/LibraryEntryView.js"></script> <!-- adds new songs to the library table -->
@@ -25,12 +26,16 @@
         // set up model objects
         var library = new Songs(songData); // ./data/data.js
         var app = new AppModel({library: library});
+        var songQueue = app.get('songQueue');
 
         // build a view for the top level of the whole app
         var appView = new AppView({model: app});
+        var songQueueView = new SongQueueView({collection: songQueue});
 
         // put the view onto the screen
         $('body').append(appView.render());
+        $('body').append(songQueueView.render());
+        
       });
     </script>
   </body>
